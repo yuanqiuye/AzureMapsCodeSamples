@@ -122,7 +122,8 @@
             resultsPanel.innerHTML = '';
 
             var center = map.getCamera().center;
-            var url = 'https://{azMapsDomain}/search/poi/json?api-version=1.0&view=Auto&query=' +
+            // Fuzzy Search supports maxFuzzyLevel; restrict the search to POIs.
+            var url = 'https://{azMapsDomain}/search/fuzzy/json?api-version=1.0&idxSet=POI&maxFuzzyLevel=4&view=Auto&query=' +
                 encodeURIComponent(query) + '&lon=' + center[0] + '&lat=' + center[1];
             return processRequest(url, { timeout: 10000 }).then((results) => {
                 if (requestId !== searchId) return;
